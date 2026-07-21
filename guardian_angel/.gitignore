@@ -1,0 +1,13 @@
+venv/ 
+__pycache__/ 
+*.pyc 
+*.pyo 
+.env 
+.env.local 
+.vscode/ 
+.idea/ 
+*.swp 
+.streamlit/cache/ 
+.ipynb_checkpoints/ 
+.DS_Store 
+Thumbs.db 
