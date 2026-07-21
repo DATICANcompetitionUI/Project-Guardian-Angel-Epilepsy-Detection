@@ -1,0 +1,5 @@
+# Voice Check-In Requirements
+twilio>=8.10.0
+flask>=2.0.0
+requests>=2.28.0
+python-dotenv>=1.0.0
