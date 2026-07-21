@@ -4,14 +4,13 @@ Run: streamlit run app/app.py
 """
 
 
-import plotly
-
-# Force install plotly if missing
-try:
-    import plotly
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "plotly"])
-    import plotly
+import streamlit as st
+import pandas as pd
+import numpy as np
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+from datetime import datetime
+import streamlit.components.v1 as components
     
 import streamlit as st
 import pandas as pd
