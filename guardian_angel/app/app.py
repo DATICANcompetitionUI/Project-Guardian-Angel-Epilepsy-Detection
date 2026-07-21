@@ -7,7 +7,6 @@ Run: streamlit run app/app.py
 import subprocess
 import sys
 
-# Force install plotly if missing
 try:
     import plotly
 except ImportError:
