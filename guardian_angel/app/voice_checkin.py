@@ -31,7 +31,7 @@ def get_twilio_config():
             "phone_number": st.secrets["twilio"]["phone_number"],
             "webhook_url": st.secrets["twilio"].get("webhook_url", ""),
         }
-    except Exceptio234567890n:
+    except Exception:
         return None
 
 
