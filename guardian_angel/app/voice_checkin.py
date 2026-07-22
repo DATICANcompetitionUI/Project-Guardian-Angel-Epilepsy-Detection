@@ -19,18 +19,27 @@ from admin_dashboard import inject_css, pulse_divider, render_table, pill, metri
 # [twilio]
 # account_sid = "..."
 # auth_token = "..."
-# phone_number = "+1"
+# phone_number = "+1..."
 # webhook_url = "https://your-ngrok-url.ngrok.io/voice_checkin"
 # ============================================
 
 def get_twilio_config():
     try:
-        return {
-            "account_sid": st.secrets["twilio"]["account_sid"],
-            "auth_token": st.secrets["twilio"]["auth_token"],
-            "phone_number": st.secrets["twilio"]["phone_number"],
-            "webhook_url": st.secrets["twilio"].get("webhook_url", ""),
-        }
+        twilio_secrets = st.secrets.get("twilio", {})
+        
+        account_sid = twilio_secrets.get("account_sid")
+        auth_token = twilio_secrets.get("auth_token")
+        phone_number = twilio_secrets.get("phone_number")
+        
+        # Ensure the essential keys exist before returning config
+        if account_sid and auth_token and phone_number:
+            return {
+                "account_sid": account_sid,
+                "auth_token": auth_token,
+                "phone_number": phone_number,
+                "webhook_url": twilio_secrets.get("webhook_url", ""),
+            }
+        return None
     except Exception:
         return None
 
@@ -151,7 +160,7 @@ def voice_checkin_dashboard():
     if not twilio_config:
         st.markdown(
             '<div class="empty-box">⚠️ Twilio isn\'t configured yet. Add <code>account_sid</code>, '
-            '<code>auth_token</code>, <code>phone_number</code>, and <code>webhook_url</code> under a '
+            '<code>auth_token</code>, and <code>phone_number</code> under a '
             '<code>[twilio]</code> section in your Streamlit secrets to enable live calling.</div>',
             unsafe_allow_html=True
         )
